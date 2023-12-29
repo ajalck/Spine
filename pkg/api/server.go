@@ -1,6 +1,6 @@
 package api
 
 
-func initApi(){
-	
+func InitApi(){
+
 }
