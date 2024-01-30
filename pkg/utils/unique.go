@@ -5,9 +5,5 @@ import (
 )
 
 func GenerateUniqueString() string {
-	defer func() string {
-		 err := recover()
-		 return err.(string)
-	}()
 	return uuid.NewString()
 }

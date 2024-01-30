@@ -1,6 +1,9 @@
 package domain
 
-import "gorm.io/gorm"
+import (
+	"github.com/ajalck/spine/pkg/utils"
+	"gorm.io/gorm"
+)
 
 type BaseModel struct {
 	ID   *gorm.Model
@@ -8,4 +11,6 @@ type BaseModel struct {
 }
 
 // hook to generate and set id26 before saving the table
-func (b *BaseModel) BeforeCreate(tx *gorm.DB)
+func (b *BaseModel) BeforeCreate(tx *gorm.DB) {
+	b.ID26 = utils.GenerateUniqueString()
+}
