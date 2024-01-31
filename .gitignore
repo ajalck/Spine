@@ -1,1 +1,2 @@
 .env
+./pkg/di/wire.gen.go

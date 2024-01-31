@@ -24,5 +24,5 @@ func NewServerHTTP(
 }
 
 func (s *Server) Start() error {
-	return s.engine.Run(":8080")
+	return s.engine.Run(":"+"6060")
 }
