@@ -2,14 +2,17 @@ package api
 
 import (
 	"github.com/ajalck/spine/pkg/api/handler/interfaces"
+	"github.com/ajalck/spine/pkg/config"
 	"github.com/gin-gonic/gin"
 )
 
 type Server struct {
 	engine *gin.Engine
+	port   string
 }
 
 func NewServerHTTP(
+	cfg *config.Config,
 	authHandler interfaces.AuthHandler,
 
 ) *Server {
@@ -20,9 +23,10 @@ func NewServerHTTP(
 
 	return &Server{
 		engine: engine,
+		port:   cfg.Port,
 	}
 }
 
 func (s *Server) Start() error {
-	return s.engine.Run(":"+"6060")
+	return s.engine.Run(":" + s.port)
 }

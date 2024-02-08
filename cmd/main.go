@@ -1,20 +1,19 @@
 package main
 
 import (
-	"fmt"
 	"log"
 
+	"github.com/ajalck/spine/pkg/config"
 	"github.com/ajalck/spine/pkg/di"
 )
 
 func main() {
-	// defer func() {
-	// 	if err := recover(); err != nil {
-	// 		log.Fatalln(err)
-	// 	}
-	// }()
-	server := di.InitializeAPI()
-	fmt.Println(server)
+	c,err:=config.LoadConfig()
+	if err!=nil{
+		log.Fatalf("Failed to load Config: ",err)
+	}
+	
+	server := di.InitializeAPI(c)
 	if err := server.Start(); err != nil {
 		log.Fatal("Failed to start server: ", err)
 	}
