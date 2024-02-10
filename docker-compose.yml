@@ -3,10 +3,8 @@ version: '3'
 services:
   postgres:
     image: postgres
-    environment:
-      - POSTGRES_DB=spine
-      - POSTGRES_USER=ajalck
-      - POSTGRES_PASSWORD=246810
+    env_file:
+      - .env
   spine:
     build: .
     depends_on:

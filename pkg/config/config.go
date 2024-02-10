@@ -5,11 +5,11 @@ import "github.com/spf13/viper"
 type Config struct {
 	Port string `mapstructure:"PORT"`
 
-	DBHost     string `mapstructure:"DB_HOST"`
-	DBPort     string `mapstructure:"DB_PORT"`
-	DBUser     string `mapstructure:"DB_USER"`
-	DBPassword string `mapstructure:"DB_PASSWORD"`
-	DBName     string `mapstructure:"DB_NAME"`
+	DBHost     string `mapstructure:"POSTGRES_HOST"`
+	DBPort     string `mapstructure:"POSTGRES_PORT"`
+	DBUser     string `mapstructure:"POSTGRES_USER"`
+	DBPassword string `mapstructure:"POSTGRES_PASSWORD"`
+	DBName     string `mapstructure:"POSTGRES_DB"`
 }
 
 func LoadConfig() (c *Config, err error) {
