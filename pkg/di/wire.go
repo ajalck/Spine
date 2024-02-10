@@ -9,16 +9,18 @@ import (
 	"github.com/ajalck/spine/pkg/config"
 	"github.com/ajalck/spine/pkg/repository"
 	"github.com/ajalck/spine/pkg/usecase"
+	"github.com/ajalck/spine/pkg/db"
 	"github.com/google/wire"
 )
 
-func InitializeAPI(c *config.Config) *api.Server {
+func InitializeAPI(c *config.Config) (*api.Server,error) {
 	wire.Build(
+		db.ConnectDB,
 		//auth
 		repository.NewAuthRepo,
 		usecase.NewAuthUseCase,
 		handler.NewAuthHandler,
 		api.NewServerHTTP,
 	)
-	return &api.Server{}
+	return &api.Server{},nil
 }

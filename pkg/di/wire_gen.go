@@ -10,16 +10,21 @@ import (
 	"github.com/ajalck/spine/pkg/api"
 	"github.com/ajalck/spine/pkg/api/handler"
 	"github.com/ajalck/spine/pkg/config"
+	"github.com/ajalck/spine/pkg/db"
 	"github.com/ajalck/spine/pkg/repository"
 	"github.com/ajalck/spine/pkg/usecase"
 )
 
 // Injectors from wire.go:
 
-func InitializeAPI(c *config.Config) *api.Server {
-	authRepo := repository.NewAuthRepo()
+func InitializeAPI(c *config.Config) (*api.Server, error) {
+	gormDB, err := db.ConnectDB(c)
+	if err != nil {
+		return nil, err
+	}
+	authRepo := repository.NewAuthRepo(gormDB)
 	authUseCase := usecase.NewAuthUseCase(authRepo)
 	authHandler := handler.NewAuthHandler(authUseCase)
 	server := api.NewServerHTTP(c, authHandler)
-	return server
+	return server, nil
 }
