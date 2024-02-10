@@ -9,7 +9,6 @@ services:
     build: .
     depends_on:
       - postgres
-    env_file:
-      - .env
+
   
         
