@@ -11,6 +11,15 @@ type BaseModel struct {
 }
 
 // hook to generate and set id26 before saving the table
-func (b *BaseModel) BeforeCreate(tx *gorm.DB) {
+func (b *BaseModel) BeforeCreate(tx *gorm.DB) (err error) {
 	b.ID26 = utils.GenerateUniqueString()
+
+	return nil
+}
+
+type User struct {
+	Id       string `gorm:"primary key"`
+	FullName string `json:"fullname" gorm:"not null"`
+	Email    string `json:"email" gorm:"not null"`
+	Password string `json:"password" gorm:"not null"`
 }
