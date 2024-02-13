@@ -9,6 +9,8 @@ services:
     build: .
     depends_on:
       - postgres
+    ports:
+      - 6060:6060
 
   
         

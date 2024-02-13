@@ -19,7 +19,12 @@ func NewServerHTTP(
 	engine := gin.New()
 	engine.Use(gin.Logger())
 
-	//api:=engine.Group("/api/v1")
+	api := engine.Group("/api/v1")
+
+	auth := api.Group("/auth")
+	{
+		auth.POST("/signup", authHandler.SignUp)
+	}
 
 	return &Server{
 		engine: engine,
